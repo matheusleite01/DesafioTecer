@@ -9,3 +9,10 @@ export type ProductProps = {
     count: number;
   };
 };
+
+export type GlobalContextProps = {
+  cartDataProducts: ProductProps[];
+  setCartDataProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>;
+  insertCartProducts: (products: ProductProps) => void;
+  removeCartProducts: (id: string) => void;
+};
