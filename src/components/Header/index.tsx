@@ -9,7 +9,7 @@ const Header = () => {
           href={"/"}
           className="flex items-center gap-2 text-purple text-xl"
         >
-          <span className="relative text-xs border border-purple rounded-full p-3 text-dsLogo before:absolute before:block before:w-[42.28px] before:h-11 before:rounded-full before:border before:border-black before:-top-[4px] before:-left-[2px]">
+          <span className="relative text-xs border border-purple rounded-full p-3 text-dsLogo before:absolute before:block before:w-[42.28px] before:h-[44px] before:rounded-full before:border before:border-black before:-top-[4px] before:-left-[2px]">
             DS
           </span>
           Dev Store
