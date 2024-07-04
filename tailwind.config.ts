@@ -23,6 +23,9 @@ const config: Config = {
       base: "1rem",
       xl: "1.25rem",
     },
+    height: {
+      "128": "32.5rem",
+    },
   },
   plugins: [],
 };
