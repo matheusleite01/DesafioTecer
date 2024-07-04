@@ -5,3 +5,7 @@
 body {
   @apply bg-background;
 }
+
+td, th {
+  @apply py-2 pr-6 pl-4
+}
