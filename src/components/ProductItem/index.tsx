@@ -3,12 +3,15 @@ import formatCurrency from "@/utils/formatCurrency";
 import { TiPlus } from "react-icons/ti";
 import Button from "../Button";
 import { ProductProps } from "@/types";
+import useGlobalContext from "@/hooks/useGlobalContext";
 
 type ProductItemProps = {
   product: ProductProps;
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
+  const {insertCartProducts} = useGlobalContext();
+
   return (
     <div className="flex flex-col justify-start items-center gap-4 bg-white max-w-80 text-center py-6 mt-1 rounded-xl shadow-xl cursor-pointer h-128 transition-all duration-200 ease-in hover:scale-105">
       <Image
@@ -31,7 +34,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <span className="text-xl text-black font-bold">
             {formatCurrency(product?.price)}
           </span>
-          <Button>
+          <Button handleClick={() => insertCartProducts(product)}>
             add to cart <TiPlus />
           </Button>
         </div>
