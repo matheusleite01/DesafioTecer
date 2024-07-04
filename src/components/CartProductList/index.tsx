@@ -3,6 +3,7 @@ import formatCurrency from "@/utils/formatCurrency";
 import { IoCloseOutline } from "react-icons/io5";
 import Image from "next/image";
 import useGlobalContext from "@/hooks/useGlobalContext";
+import { toast } from "sonner";
 type CartProductListProps = {
   cartProducts: ProductProps[];
 };
@@ -11,6 +12,13 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
   const { removeCartProducts } = useGlobalContext();
 
   const totalPrice = cartProducts?.reduce((acu, item) => acu + item.price, 0);
+
+  const handleRemoveProducts = (id: string, title: string) => {
+    removeCartProducts(id)
+    toast.success(
+      `"${title.slice(0, 10)}" has been removed from your cart`,
+    );
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -33,7 +41,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
                 <IoCloseOutline
                   size={20}
                   className="text-purple cursor-pointer rounded transition-all duration-100 hover:bg-black hover:text-white"
-                  onClick={() => removeCartProducts(id)}
+                  onClick={() => handleRemoveProducts(id, title)}
                 />
               </div>
             </td>

@@ -4,13 +4,21 @@ import { TiPlus } from "react-icons/ti";
 import Button from "../Button";
 import { ProductProps } from "@/types";
 import useGlobalContext from "@/hooks/useGlobalContext";
+import { toast } from "sonner";
 
 type ProductItemProps = {
   product: ProductProps;
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
-  const {insertCartProducts} = useGlobalContext();
+  const { insertCartProducts } = useGlobalContext();
+
+  const handleClickProduct = () => {
+    insertCartProducts(product);
+    toast.success(
+      `"${product.title.slice(0, 10)}" has been added to your cart`,
+    );
+  };
 
   return (
     <div className="flex flex-col justify-start items-center gap-4 bg-white max-w-80 text-center py-6 mt-1 rounded-xl shadow-xl cursor-pointer h-128 transition-all duration-200 ease-in hover:scale-105">
@@ -34,7 +42,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <span className="text-xl text-black font-bold">
             {formatCurrency(product?.price)}
           </span>
-          <Button handleClick={() => insertCartProducts(product)}>
+          <Button handleClick={handleClickProduct}>
             add to cart <TiPlus />
           </Button>
         </div>
