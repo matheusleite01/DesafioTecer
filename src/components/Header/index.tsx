@@ -14,7 +14,9 @@ const Header = () => {
           </span>
           Dev Store
         </Link>
-        <PiShoppingCartLight size={33} className="cursor-pointer"/>
+        <Link href={"/cart"}>
+          <PiShoppingCartLight size={33} className="cursor-pointer" />
+        </Link>
       </div>
     </header>
   );
