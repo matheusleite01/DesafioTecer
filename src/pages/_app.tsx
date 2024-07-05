@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <Toaster position="top-center" richColors/>
+      <Toaster position="top-center" richColors duration={1500}/>
     </GlobalProvider>
   );
 }
