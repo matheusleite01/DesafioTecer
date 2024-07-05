@@ -13,6 +13,7 @@ type ProductDetailsProps = {
 const ProductDetails = ({ product }: ProductDetailsProps) => {
   const { insertCartProducts, cartDataProducts } = useGlobalContext();
   const cartsId = cartDataProducts?.map((item) => item.id);
+  const doublePrice = product.price * 2;
 
   const handleClickProduct = () => {
     insertCartProducts(product);
@@ -41,8 +42,13 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           </p>
         </div>
         <div className="flex flex-col gap-5">
-          <span className="text-black text-xll font-bold max-md:text-xa">
+          <span className="flex gap-1 text-black text-xll font-bold max-md:text-xa">
             {formatCurrency(product?.price)}
+            {+product.id % 2 === 0 && (
+              <span className="text-borderGray text-base font-normal line-through max-md:text-xs">
+                {formatCurrency(doublePrice)}
+              </span>
+            )}
           </span>
           <div className="flex gap-2 items-center">
             <Image src={starIcon} alt="star" />
