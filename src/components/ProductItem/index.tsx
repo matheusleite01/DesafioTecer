@@ -4,6 +4,7 @@ import { TiPlus } from "react-icons/ti";
 import Button from "../Button";
 import { ProductProps } from "@/types";
 import useGlobalContext from "@/hooks/useGlobalContext";
+import Router from "next/router";
 import { toast } from "sonner";
 
 type ProductItemProps = {
@@ -14,7 +15,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
   const { insertCartProducts, cartDataProducts } = useGlobalContext();
   const cartsId = cartDataProducts?.map((item) => item.id);
 
-  const handleClickProduct = () => {
+  const handleClickProduct = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
     insertCartProducts(product);
     toast.success(
       `"${product.title.slice(0, 10)}" has been added to your cart`,
@@ -22,7 +26,10 @@ const ProductItem = ({ product }: ProductItemProps) => {
   };
 
   return (
-    <div className="flex flex-col justify-start items-center gap-4 bg-white max-w-80 text-center py-6 mt-1 rounded-xl shadow-xl cursor-pointer h-128 transition-all duration-200 ease-in hover:scale-105">
+    <div
+      className="flex flex-col justify-start items-center gap-4 bg-white max-w-80 text-center py-6 mt-1 rounded-xl shadow-xl cursor-pointer h-128 transition-all duration-200 ease-in hover:scale-105"
+      onClick={() => Router.push(`/${product.id}`)}
+    >
       <Image
         src={product?.image}
         width={150}

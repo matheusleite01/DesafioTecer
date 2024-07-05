@@ -1,6 +1,6 @@
 type ButtonProps = {
   children: React.ReactNode;
-  handleClick?: () => void;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 const Button = ({ children, handleClick }: ButtonProps) => {
