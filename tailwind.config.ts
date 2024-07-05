@@ -22,6 +22,7 @@ const config: Config = {
       sm: "0.5rem",
       base: "1rem",
       xl: "1.25rem",
+      xa: "2rem",
       xll: "2.5rem"
     },
     height: {
