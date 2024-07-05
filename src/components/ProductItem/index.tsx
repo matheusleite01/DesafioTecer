@@ -11,7 +11,8 @@ type ProductItemProps = {
 };
 
 const ProductItem = ({ product }: ProductItemProps) => {
-  const { insertCartProducts } = useGlobalContext();
+  const { insertCartProducts, cartDataProducts } = useGlobalContext();
+  const cartsId = cartDataProducts?.map((item) => item.id);
 
   const handleClickProduct = () => {
     insertCartProducts(product);
@@ -38,13 +39,17 @@ const ProductItem = ({ product }: ProductItemProps) => {
             {product?.description.slice(0, 100)}
           </p>
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <span className="text-xl text-black font-bold">
             {formatCurrency(product?.price)}
           </span>
-          <Button handleClick={handleClickProduct}>
-            add to cart <TiPlus />
-          </Button>
+          {cartsId.includes(product.id) ? (
+            <span className="text-xs text-green">In the cart</span>
+          ) : (
+            <Button handleClick={handleClickProduct}>
+              add to cart <TiPlus />
+            </Button>
+          )}
         </div>
       </div>
     </div>
