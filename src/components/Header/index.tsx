@@ -9,7 +9,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center p-2.5">
         <Link
           href={"/"}
-          className="flex items-center gap-2 text-purple text-xl"
+          className="flex items-center gap-3 text-purple text-xb"
         >
           <span className="relative text-xs border border-purple rounded-full p-3 text-dsLogo before:absolute before:block before:w-[42.28px] before:h-[44px] before:rounded-full before:border before:border-black before:-top-[4px] before:-left-[2px]">
             DS
