@@ -1,5 +1,5 @@
 import Image from "next/image";
-import img from "@/assets/emptyCart.png";
+import img from "@/assets/img/emptyCart.png";
 import Link from "next/link";
 
 const EmptyCart = () => {
