@@ -1,4 +1,4 @@
-import fetchIdProduct from "@/utils/fetchIdProdyct";
+import { getIdProduct } from "@/pages/api/products";
 import { ProductProps } from "@/types/index";
 import type { GetStaticProps, GetStaticPaths } from "next";
 import React from "react";
@@ -46,8 +46,20 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async ({ params }) => {
   const id = params?.product_id as string;
-  const productIdData = await fetchIdProduct(id);
-  return { props: { productIdData } };
+  const redirectPage = {
+    redirect: {
+      destination: "/",
+      permanent: false,
+    },
+    props: {},
+  };
+  try {
+    const productIdData = (await getIdProduct(id)) as ProductProps;
+    if (!productIdData) return redirectPage;
+    return { props: { productIdData } };
+  } catch (err) {
+    return redirectPage;
+  }
 }) satisfies GetStaticProps<{}>;
 
 export default ProductDetailsPage;
