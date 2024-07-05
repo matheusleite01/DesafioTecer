@@ -7,6 +7,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MoonLoader } from "react-spinners";
+import Head from "next/head";
 
 type ProductDetailsProps = {
   productIdData: ProductProps;
@@ -24,16 +25,22 @@ const ProductDetailsPage = ({ productIdData }: ProductDetailsProps) => {
   }
 
   return (
-    <div className="flex justify-center h-[80vh] container mx-auto">
-      <Link
-        href={"/"}
-        className=" absolute left-20 top-24 flex items-center gap-1 text-xl text-purple font-bold max-md:hidden"
-      >
-        <IoMdArrowRoundBack size={20} />
-        Back
-      </Link>
-      <ProductDetails product={productIdData} />
-    </div>
+    <>
+      <Head>
+        <title>Product details</title>
+        <meta name="description" content="Product content" />
+      </Head>
+      <div className="flex justify-center h-[80vh] container mx-auto">
+        <Link
+          href={"/"}
+          className=" absolute left-20 top-24 flex items-center gap-1 text-xl text-purple font-bold max-md:hidden"
+        >
+          <IoMdArrowRoundBack size={20} />
+          Back
+        </Link>
+        <ProductDetails product={productIdData} />
+      </div>
+    </>
   );
 };
 

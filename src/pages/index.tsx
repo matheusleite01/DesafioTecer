@@ -1,3 +1,4 @@
+import Head from "next/head";
 import EmptyData from "@/components/EmptyData";
 import ProductList from "@/components/ProductList";
 import { ProductProps } from "@/types";
@@ -10,13 +11,19 @@ type PageProps = {
 
 export default function Page({ data, error }: PageProps) {
   return (
-    <div className="container mx-auto">
-      {data.length ? (
-        <ProductList dataProduct={data} />
-      ) : (
-        <EmptyData error={error} />
-      )}
-    </div>
+    <>
+      <Head>
+        <title>Home</title>
+        <meta name="description" content="Dev Store products" />
+      </Head>
+      <div className="container mx-auto">
+        {data.length ? (
+          <ProductList dataProduct={data} />
+        ) : (
+          <EmptyData error={error} />
+        )}
+      </div>
+    </>
   );
 }
 
