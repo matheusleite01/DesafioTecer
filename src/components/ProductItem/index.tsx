@@ -14,6 +14,7 @@ type ProductItemProps = {
 const ProductItem = ({ product }: ProductItemProps) => {
   const { insertCartProducts, cartDataProducts } = useGlobalContext();
   const cartsId = cartDataProducts?.map((item) => item.id);
+  const doublePrice = product.price * 2;
 
   const handleClickProduct = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -47,8 +48,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </p>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-xl text-black font-bold">
+          <span className="flex gap-1 text-xl text-black font-bold">
             {formatCurrency(product?.price)}
+            {+product.id % 2 === 0 && (
+              <span className="text-borderGray text-xs font-normal line-through">
+                {formatCurrency(doublePrice)}
+              </span>
+            )}
           </span>
           {cartsId.includes(product.id) ? (
             <span className="text-xs text-green">In the cart</span>
