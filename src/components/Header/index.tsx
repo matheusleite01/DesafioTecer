@@ -16,7 +16,7 @@ const Header = () => {
           </span>
           Dev Store
         </Link>
-        <Link href={"/cart"} className="relative">
+        <Link href={"/cart"} className="relative" role="linkCart">
           <PiShoppingCartLight size={33} className="cursor-pointer" />
           <div className="absolute -top-2 -right-2 bg-black text-white w-5 h-[20px] text-center text-xs rounded-full">{cartDataProducts.length}</div>
         </Link>
