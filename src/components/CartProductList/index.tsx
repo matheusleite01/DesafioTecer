@@ -46,6 +46,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
                     size={20}
                     className="text-purple cursor-pointer rounded transition-all duration-100 hover:bg-black hover:text-white"
                     onClick={() => handleRemoveProducts(id, title)}
+                    role="button"
                   />
                 </div>
               </td>
