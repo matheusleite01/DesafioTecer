@@ -19,7 +19,7 @@ const ProductDetailsPage = ({ productIdData }: ProductDetailsProps) => {
   if (router.isFallback) {
     return (
       <div className="flex items-center justify-center h-[90vh] container mx-auto">
-        <MoonLoader color="#A51A7D" />
+        <MoonLoader color="#A51A7D" role="spinner"/>
       </div>
     );
   }
