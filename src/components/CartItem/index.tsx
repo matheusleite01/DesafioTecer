@@ -28,6 +28,7 @@ const CardItem = ({ cardProduct }: CardItemProps) => {
           size={16}
           color="#DFDFDF"
           className="cursor-pointer"
+          role="minus"
           onClick={() => quantityChange("minus", cardProduct, increaseQuantity)}
         />
         <span className="font-bold text-xs">{cardProduct?.quantity}</span>
@@ -35,6 +36,7 @@ const CardItem = ({ cardProduct }: CardItemProps) => {
           size={19}
           color="#DFDFDF"
           className="cursor-pointer"
+          role="increase"
           onClick={() =>
             quantityChange("increase", cardProduct, increaseQuantity)
           }
