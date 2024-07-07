@@ -17,6 +17,14 @@ const mockDataProduct = [
   },
 ];
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      asPath: jest.fn(),
+    };
+  },
+}));
+
 
 describe("ProductList component", () => {
   it("Should render component", () => {

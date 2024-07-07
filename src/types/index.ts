@@ -8,6 +8,7 @@ export type ProductProps = {
     rate: number;
     count: number;
   };
+  quantity?: number;
 };
 
 export type GlobalContextProps = {
@@ -15,4 +16,6 @@ export type GlobalContextProps = {
   setCartDataProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>;
   insertCartProducts: (products: ProductProps) => void;
   removeCartProducts: (id: string) => void;
+  increaseQuantity: (id: string, mode: "increase" | "minus") => void
+  enabledSideCart: boolean | 0
 };

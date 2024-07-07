@@ -3,6 +3,14 @@ import Header from "@/components/Header";
 import GlobalProvider from "@/context/GlobalContext";
 import { render, screen } from "@testing-library/react";
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      asPath: jest.fn(),
+    };
+  },
+}));
+
 describe("Header component", () => {
 
   it("Should render component", () => {

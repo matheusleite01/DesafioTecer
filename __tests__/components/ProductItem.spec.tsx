@@ -29,6 +29,14 @@ const mockContextValue = {
   setCartDataProducts: jest.fn(),
 };
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      asPath: jest.fn(),
+    };
+  },
+}));
+
 describe("ProductItem component", () => {
   it("Should render component", () => {
     render(

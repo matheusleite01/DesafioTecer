@@ -5,15 +5,22 @@ import Image from "next/image";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
+import totalPrice from "@/utils/totalPrice";
+import { useState } from "react";
+import { FaMinusCircle } from "react-icons/fa";
+import { AiFillPlusCircle } from "react-icons/ai";
+import quantityChange from "@/utils/quantityChange";
 type CartProductListProps = {
   cartProducts: ProductProps[];
 };
 
 const CartProductList = ({ cartProducts }: CartProductListProps) => {
-  const { removeCartProducts } = useGlobalContext();
+  const { removeCartProducts, increaseQuantity } = useGlobalContext();
   const { push } = useRouter();
-
-  const totalPrice = cartProducts?.reduce((acu, item) => acu + item.price, 0);
+  const price = totalPrice(cartProducts);
+  const [enabledIncreaseAndMinus, setEnabledIncreaseAndMinus] = useState<
+    string | null
+  >(null);
 
   const handleRemoveProducts = (id: string, title: string) => {
     removeCartProducts(id);
@@ -21,7 +28,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 max-sm:mx-2.5">
+    <div className="flex flex-col gap-4 max-sm:mx-1">
       <table className="bg-white w-full mt-7">
         <tr className="text-left text-black">
           <th className="w-3/5">Product</th>
@@ -29,23 +36,62 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
           <th className="w-1/5 text-right">Price</th>
         </tr>
         <tbody>
-          {cartProducts?.map(({ id, title, price, image }) => (
-            <tr key={id} className="border-y-2 border-gray">
+          {cartProducts?.map((product) => (
+            <tr key={product.id} className="border-y-2 border-gray">
               <td
                 className="flex items-center gap-4 hover:underline cursor-pointer"
-                onClick={() => push(`/${id}`)}
+                onClick={() => push(`/${product.id}`)}
               >
-                <Image src={image} width={60} height={60} alt={title} />
-                {title.slice(0, 10)}
+                <Image
+                  src={product.image}
+                  width={60}
+                  height={60}
+                  alt={product.title}
+                  className="max-sm:w-7"
+                />
+                {product.title.slice(0, 10)}
               </td>
-              <td className="text-center">1</td>
+              <td
+                className="text-center"
+                onMouseEnter={() => setEnabledIncreaseAndMinus(product.id)}
+                onMouseLeave={() => setEnabledIncreaseAndMinus(null)}
+              >
+                {enabledIncreaseAndMinus === product.id ? (
+                  <span className="flex justify-center items-center gap-3">
+                    {" "}
+                    <FaMinusCircle
+                      size={16}
+                      color="#DFDFDF"
+                      className="cursor-pointer"
+                      onClick={() =>
+                        quantityChange("minus", product, increaseQuantity)
+                      }
+                    />
+                    {product.quantity}
+                    <AiFillPlusCircle
+                      size={19}
+                      color="#DFDFDF"
+                      className="cursor-pointer"
+                      onClick={() =>
+                        quantityChange("increase", product, increaseQuantity)
+                      }
+                    />
+                  </span>
+                ) : (
+                  <>
+                    <span>{product.quantity}</span>
+                  </>
+                )}
+              </td>
               <td className="text-right">
                 <div className="flex items-center justify-end gap-4">
-                  <span>{formatCurrency(price)}</span>
+                  <span>{formatCurrency(product.price)}</span>
                   <IoCloseOutline
                     size={20}
                     className="text-purple cursor-pointer rounded transition-all duration-100 hover:bg-black hover:text-white"
-                    onClick={() => handleRemoveProducts(id, title)}
+                    onClick={() =>
+                      handleRemoveProducts(product.id, product.title)
+                    }
                     role="button"
                   />
                 </div>
@@ -55,7 +101,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
         </tbody>
       </table>
       <p className="text-xl self-end mr-2">
-        Total: <span className="font-bold">{formatCurrency(totalPrice)}</span>
+        Total: <span className="font-bold">{formatCurrency(price)}</span>
       </p>
     </div>
   );

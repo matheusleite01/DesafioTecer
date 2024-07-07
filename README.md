@@ -1,6 +1,6 @@
 # Dev Store
 
-![App Screenshot](public/img/ds.png)
+![App Screenshot](public/img/readme.png)
 
 #### Acesse o projeto aqui -> [Dev Store](https://desafio-tecer.vercel.app/)
 

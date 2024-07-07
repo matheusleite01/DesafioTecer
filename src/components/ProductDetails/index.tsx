@@ -5,13 +5,15 @@ import formatCurrency from "@/utils/formatCurrency";
 import { TiPlus } from "react-icons/ti";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import Rating from "@mui/material/Rating";
 import { toast } from "sonner";
 
 type ProductDetailsProps = {
   product: ProductProps;
 };
 const ProductDetails = ({ product }: ProductDetailsProps) => {
-  const { insertCartProducts, cartDataProducts } = useGlobalContext();
+  const { insertCartProducts, cartDataProducts, enabledSideCart } =
+    useGlobalContext();
   const cartsId = cartDataProducts?.map((item) => item.id);
   const doublePrice = product.price * 2;
 
@@ -21,17 +23,20 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       `"${product.title.slice(0, 10)}" has been added to your cart`,
     );
   };
-
   return (
-    <div className="flex justify-center items-center gap-10 m-5 max-md:flex-wrap">
+    <div
+      className={`flex justify-center items-center gap-10 m-5 ${
+        enabledSideCart ? " max-lg:flex-wrap" : "max-md:flex-wrap"
+      }`}
+    >
       <Image
         src={product?.image}
         width={300}
         height={300}
         alt={product?.title}
-        className="mr-10 max-md:w-52"
+        className={`mr-10 ${enabledSideCart ? "max-lg:w-52" : "max-md:w-52"}`}
       />
-      <div className="w-0.5 bg-gray h-[430px] max-md:hidden"></div>
+      <div className={`w-0.5 bg-gray h-[430px] ${enabledSideCart ? "max-lg:hidden": "max-md:hidden"}`}></div>
       <div className="flex flex-col gap-12 max-md:gap-6">
         <div className="flex flex-col gap-2">
           <h1 className="text-xll text-purple font-bold max-md:text-xa">
@@ -51,8 +56,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             )}
           </span>
           <div className="flex gap-2 items-center">
-            <Image src={starIcon} alt="star" />
-            <span className="text-borderGray underline">400 review</span>
+            <Rating
+              name="half-rating-read"
+              defaultValue={product?.rating?.rate}
+              readOnly
+            />
+            <span className="text-borderGray text-xs underline">
+              {product?.rating?.count} review
+            </span>
           </div>
         </div>
         {cartsId?.includes(product?.id) ? (
