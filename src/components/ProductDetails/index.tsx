@@ -5,6 +5,7 @@ import formatCurrency from "@/utils/formatCurrency";
 import { TiPlus } from "react-icons/ti";
 import useGlobalContext from "@/hooks/useGlobalContext";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import Rating from "@mui/material/Rating";
 import { toast } from "sonner";
 
 type ProductDetailsProps = {
@@ -21,7 +22,6 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       `"${product.title.slice(0, 10)}" has been added to your cart`,
     );
   };
-
   return (
     <div className="flex justify-center items-center gap-10 m-5 max-md:flex-wrap">
       <Image
@@ -51,8 +51,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             )}
           </span>
           <div className="flex gap-2 items-center">
-            <Image src={starIcon} alt="star" />
-            <span className="text-borderGray underline">400 review</span>
+            <Rating
+              name="half-rating-read"
+              defaultValue={product?.rating?.rate}
+              readOnly
+            />
+            <span className="text-borderGray text-xs underline">
+              {product?.rating?.count} review
+            </span>
           </div>
         </div>
         {cartsId?.includes(product?.id) ? (
