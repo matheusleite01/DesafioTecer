@@ -10,7 +10,7 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const { asPath } = useRouter();
   const { width } = useWindowSize();
   const enabledSideCart =
-    cartDataProducts.length && asPath !== "/cart" && (width as number) > 600;
+    cartDataProducts.length > 0 && asPath !== "/cart" && (width as number) > 600;
 
   const insertCartProducts = (products: ProductProps) => {
     setCartDataProducts((prev) => {
