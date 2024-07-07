@@ -23,6 +23,14 @@ jest.mock("sonner", () => ({
   },
 }));
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      asPath: jest.fn(),
+    };
+  },
+}));
+
 const mockContextValue = {
   insertCartProducts: jest.fn(),
   cartDataProducts: [],

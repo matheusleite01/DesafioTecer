@@ -18,6 +18,14 @@ const mockProduct: ProductProps[] = [
   },
 ];
 
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      asPath: jest.fn(),
+    };
+  },
+}));
+
 describe("Home page", () => {
   it("Should render page", () => {
     render(
