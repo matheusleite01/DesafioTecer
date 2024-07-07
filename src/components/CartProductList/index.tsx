@@ -28,7 +28,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 max-sm:mx-2.5">
+    <div className="flex flex-col gap-4 max-sm:mx-1">
       <table className="bg-white w-full mt-7">
         <tr className="text-left text-black">
           <th className="w-3/5">Product</th>
@@ -47,6 +47,7 @@ const CartProductList = ({ cartProducts }: CartProductListProps) => {
                   width={60}
                   height={60}
                   alt={product.title}
+                  className="max-sm:w-7"
                 />
                 {product.title.slice(0, 10)}
               </td>
